@@ -135,6 +135,43 @@
     .btn{ padding:6px 10px; font-size:14px }
     select.ctrl, input[type=range].ctrl, input[type=text].ctrl{ height:32px }
   }
+    .dialog-footer {
+    display: flex;
+    justify-content: space-between; /* OHJE vasemmalle, Aloita peli oikealle */
+    align-items: center;
+    margin-top: 1em;
+  }
+
+  /* OHJE-linkin tyyli */
+  .ohje-linkki {
+    display: inline-block;      /* jotta padding toimii paremmin */
+    padding: 8px 16px;
+    background-color: #0F172A;  /* tummansininen tausta */
+    color: white;               /* valkoinen teksti */
+    text-decoration: none;      /* poistaa alleviivauksen */
+    border-radius: 8px;         /* pyöristetyt kulmat */
+    font-weight: bold;
+  }
+
+  .ohje-linkki:hover {
+    background-color: #1e293b;  /* vaaleampi hover-efekti */
+  }
+  /* Aloita peli -nappi pysyy omassa tyylissään */
+  
+  #startBtn {
+    padding: 8px 16px;
+    font-size: 1rem;
+    border-radius: 8px;
+
+    background-color: #0F172A;
+    color: white;
+	font-weight: bold;
+    cursor: pointer;
+  }
+  #startBtn:hover {
+    background-color: #1e293b;
+  }
+  
 </style>
 </head>
 <body>
@@ -188,10 +225,11 @@
     <div class="note" id="latinNote" style="display:none; margin-top:-2px;">
       Latin-first toimii vain kun sisäalue on 9×9 → valitse ruudukon koko 10×10.
     </div>
+ <div class="dialog-footer">
+  <a href="./ohje.html" class="ohje-linkki">Ohje</a>
+  <button id="startBtn">Aloita peli</button>
+</div>
 
-    <div class="dlg-actions">
-      <button class="btn" id="startBtn">Aloita peli</button>
-    </div>
   </dialog>
 
   <!-- VARSINAINEN PELINÄYTTÖ -->
