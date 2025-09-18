@@ -171,20 +171,7 @@
   #startBtn:hover {
     background-color: #1e293b;
   }
-.loader {
-  border: 6px solid #f3f3f3;
-  border-top: 6px solid #f59e0b; /* oranssi teema */
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
-  margin: 0 auto 10px auto;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-} 
+  
 </style>
 </head>
 <body>
@@ -263,16 +250,7 @@
       <span class="status" id="status">Valitse ruutu aloittaaksesi.</span>
     </div>
   </div>
-<div id="spinner" style="display:none;
-     position:fixed; top:50%; left:50%;
-     transform:translate(-50%,-50%);
-     background:rgba(0,0,0,0.6);
-     color:white; padding:20px 30px;
-     border-radius:8px; font-size:1.1rem;
-     z-index:2000; text-align:center;">
-  <div class="loader"></div>
-  <div>Tarkistetaan yksikäsitteisyyttä…</div>
-</div>
+
 <script>
 /* ======================= ASETUKSET ======================= */
 let N = 10; // kokonaiskoko (sis. kehyksen)
@@ -883,12 +861,6 @@ showBtn.addEventListener('click', ()=>{
   refreshCells();
 });
 
-function showSpinner() {
-  document.getElementById("spinner").style.display = "block";
-}
-function hideSpinner() {
-  document.getElementById("spinner").style.display = "none";
-}
 /* ---------- Uuden pulman teko ---------- */
 function newPuzzle(){
   // siemen
@@ -901,72 +873,64 @@ function newPuzzle(){
 
   statusEl.textContent='Luodaan uutta ruudukkoa…';
 
-  // Näytä spinner ennen raskasta vaihetta
-  showSpinner();
+  // 1) Ratkaisuruudukko
+  if(modeSel.value==='latin'){
+    if(N!==10){ modeSel.value='classic'; }
+  }
+  if(modeSel.value==='latin'){
+    SOL = latinSolution(); // 9x9 sisus
+  }
 
-  setTimeout(() => {
-    // 1) Ratkaisuruudukko
-    if(modeSel.value==='latin'){
-      if(N!==10){ modeSel.value='classic'; }
-    }
-    if(modeSel.value==='latin'){
-      SOL = latinSolution();
-    }
+  // 2) Maski
+  MASK = generateMaskByPct(parseInt(pct.value,10));
 
-    // 2) Maski
-    MASK = generateMaskByPct(parseInt(pct.value,10));
-
-    // 3) Classic
-    let attempts = 0;
-    if(modeSel.value==='classic'){
-      while(true){
-        SOL = fillSolutionClassic(MASK);
-        if(!SOL){
-          if(++attempts>8){
-            MASK = generateMaskByPct(parseInt(pct.value,10));
-            attempts=0;
-          } else {
-            continue;
-          }
-        } else {
-          CLUES = computeClues(MASK, SOL);
-          if(uniqueChk.checked){
-            const res = countSolutions(MASK, CLUES, 2);
-            if(res.capped){
-              statusEl.textContent='Uniikkitarkistus keskeytettiin (liian raskas). Luo uudelleen tai löysää asetuksia.';
-              break;
-            }
-            if(res.count===1){
-              break;
-            } else {
-              if(++attempts>10){
-                MASK = generateMaskByPct(parseInt(pct.value,10));
-                attempts=0;
-              }
-              SOL = null;
-              continue;
-            }
-          } else {
+  // 3) Classic: täytä ratkaisu maskin päälle, laske vihjeet
+  let attempts = 0;
+  if(modeSel.value==='classic'){
+    while(true){
+      SOL = fillSolutionClassic(MASK);
+      if(!SOL){
+        if(++attempts>8){
+          MASK = generateMaskByPct(parseInt(pct.value,10));
+          attempts=0;
+        }else{
+          continue;
+        }
+      }else{
+        CLUES = computeClues(MASK, SOL);
+        if(uniqueChk.checked){
+          const res = countSolutions(MASK, CLUES, 2);
+          if(res.capped){
+            statusEl.textContent='Uniikkitarkistus keskeytettiin (liian raskas). Luo uudelleen tai löysää asetuksia.';
             break;
           }
+          if(res.count===1){
+            break;
+          }else{
+            if(++attempts>10){
+              MASK = generateMaskByPct(parseInt(pct.value,10));
+              attempts=0;
+            }
+            SOL = null;
+            continue;
+          }
+        }else{
+          break;
         }
       }
-    } else {
-      CLUES = computeClues(MASK, SOL);
     }
+  } else {
+    // Latin-first: vihjeet suoraan ratkaisusta
+    CLUES = computeClues(MASK, SOL);
+  }
 
-    // 4) Pelaajalle tyhjä taulu
-    values = Array.from({length:N},()=>Array(N).fill(""));
-    selected=null;
-    buildBoard();
-    refreshCells();
-    statusEl.textContent='Uusi ruudukko valmis. Valitse ruutu ja syötä numero.';
-
-    // Piilota spinner
-    hideSpinner();
-  }, 50); // pieni viive, jotta spinner ehtii näkyä
+  // 4) Pelaajalle tyhjä taulu
+  values = Array.from({length:N},()=>Array(N).fill(""));
+  selected=null;
+  buildBoard();
+  refreshCells();
+  statusEl.textContent='Uusi ruudukko valmis. Valitse ruutu ja syötä numero.';
 }
-
 
 /* ---------- Alustus ---------- */
 (function init(){
