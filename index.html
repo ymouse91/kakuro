@@ -61,11 +61,71 @@
   h1{ margin:0 0 4px; font-size:22px }
   .wrap{ display:grid; gap:12px; align-items:start; width: min(100vw - 20px, 480px) }
   .row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap }
-  .board{
-    display:grid; gap:var(--gap); background:#bbb; padding:var(--gap);
-    border-radius:10px; box-shadow:0 4px 14px rgba(0,0,0,.08);
-    user-select:none;
-  }
+
+/* Ruudukko skaalautuu sisällön mukaan (ei veny 100% leveäksi) */
+.board {
+  display: inline-grid;        /* shrink-wrapaa sisällön */
+  width: max-content;          /* tai fit-content, mutta max-content on varma */
+  margin: 30px auto;
+  gap: var(--gap);
+
+  /* tausta, pyöristykset yms. – pidä omasi tai käytä näitä */
+  position: relative;
+  padding: calc(var(--gap) + 2px);
+  border-radius: 16px;
+  background:
+    radial-gradient(120% 120% at 20% 0%,
+      rgba(255,255,255,0.28) 0%,
+      rgba(255,255,255,0) 40%),
+    linear-gradient(145deg, #2c3e50, #34495e);
+  box-shadow: 0 6px 18px rgba(0,0,0,.12);
+  user-select: none;
+}
+
+/* Estä vanhemman flex/grid-venytys */
+.board {
+  align-self: center;   /* jos parentti on flex/grid joka venyttää */
+  justify-self: center; /* jos parentti on CSS Grid */
+}
+
+/* (Valinnainen) hehkuva gradienttikehys */
+.board::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 8px;  /* paksumpi kehys */
+  border-radius: inherit;
+  background: conic-gradient(
+    from 0deg,
+    #ff3366,
+    #ff6b00,
+    #06f,
+    #06b6d4,
+    #8b5cf6,
+    #ff3366
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  animation: borderGlow 3s linear infinite;
+  pointer-events: none;
+  opacity: 1;           /* kirkkaampi */
+  filter: blur(0.3px);    /* hyvin pieni pehmennys */
+}
+
+@keyframes borderGlow {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }  /* pyörivä sateenkaari */
+}
+
+
+/* Vähennä animaatiota, jos käyttäjä ei halua liikettä */
+@media (prefers-reduced-motion: reduce) {
+  .board::before { animation: none; opacity: .6; }
+}
+
   .cell{ width:var(--cell); height:var(--cell); background:#fff; display:grid; place-items:center;
     font-weight:700; font-size:20px; cursor:pointer; position:relative; border-radius:8px; transition:transform .06s ease; }
   .cell:active{ transform:scale(.98) }
