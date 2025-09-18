@@ -244,78 +244,6 @@
   100% { transform: rotate(360deg); }
 } 
 
-/* iPhone / pienet näytöt */
-/* 1) Varmista mobiilin mittakaava (HTML:iin, <head>) */
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-
-/* 2) Yleiset suojaukset ylivuodolta */
-html, body { max-width: 100%; overflow-x: hidden; }
-.wrap, .board, .grid { max-width: 100%; width: auto; min-width: 0; }
-
-/* Jos .wrap:ssa on ollut: width: min(100vw - 20px, 480px);
-   se saa jäädä, mutta mobiilissa kavennetaan lisää. */
-
-/* 3) Tee solukoosta responsiivinen:
-   – jos grid on tyyliä: grid-template-columns: repeat(N, var(--cell));
-   niin pelkkä --cell:n pienennys riittää kaventamaan koko ruudukon. */
-:root{
-  /* desktop/ipad */
-  --cell: 46px;
-  --gap: 2px;
-  --keyW: 56px;
-  --keyH: 56px;
-  --padGap: 8px;
-}
-
-/* 4) iPhone / kapeat näytöt */
-@media (max-width: 430px) {
-  /* pienennä solun kokoa → koko ruudukko kapenee */
-  :root{
-    --cell: 34px;   /* kokeile 30–36px välillä */
-    --gap: 2px;
-    --keyW: 44px;
-    --keyH: 44px;
-    --padGap: 6px;
-  }
-
-  /* jos jokin asetti min-widthin, katkaise se varmasti */
-  .wrap, .main, .board, .grid { min-width: 0 !important; width: 100% !important; }
-
-  /* jos grid on flex-lapsi, tämä estää “väkisin” venymisen */
-  .grid, .board { flex: 1 1 auto; min-inline-size: 0; }
-
-  /* varmista, ettei sarakeleveydet ole kiinteitä px:änä */
-  .grid{
-    /* jos aiemmin oli esim. 9 kovaa saraketta 56px → se ei kutistu.
-       Tämä säilyttää N-saraketta mutta käyttää var(--cell) */
-    grid-template-columns: repeat(var(--N, 9), var(--cell));
-    gap: var(--gap);
-  }
-
-  /* näppäimistö tiiviimmäksi */
-  .pad{
-    gap: var(--padGap);
-    padding: 12px;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-  .key{
-    width: var(--keyW);
-    height: var(--keyH);
-    font-size: 18px;
-  }
-
-  /* dialogit ja paneelit täysleveydelle */
-  .dialog, .settings, .panel {
-    width: 92vw; max-width: 92vw; min-width: 0;
-  }
-
-  /* jos jossain on white-space: nowrap ja se venyttää leveyttä */
-  .toolbar, .status, .row { white-space: normal; min-width: 0; }
-}
-
-/* 5) Jos sinulla on kiinteitä leveyksiä jossain:
-   .grid { min-width: 480px; }  TAI  .board { width: 520px; }
-   nämä on poistettava tai yliajettava yllä olevilla säännöillä. */
 
 
 </style>
@@ -1124,7 +1052,7 @@ startBtn.addEventListener('click', ()=>{
   padding: 4px;
   z-index: 9999;
 ">
-  Versio 1.0.5
+  Versio 1.0.4
 </footer>
 </body>
 </html>
