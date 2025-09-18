@@ -243,6 +243,35 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 } 
+
+/* iPhone / pienet näytöt */
+@media (max-width: 600px) {
+  /* numeronäppäimet pienemmiksi */
+  .key {
+    width: 42px;   /* aiemmin 56px */
+    height: 42px;
+    font-size: 18px;
+  }
+
+  /* näppäinrivit tiiviimmäksi */
+  .pad {
+    gap: 4px;      /* aiemmin 8px */
+    padding: 12px;
+    grid-template-columns: repeat(5, 1fr); /* rivit jakoon */
+  }
+
+  /* tekstit ja otsikot pienemmiksi */
+  h1, h2, h3 {
+    font-size: 1.1rem;
+  }
+
+  /* asetusten dialogi leveys */
+  .dialog {
+    width: 90vw;   /* mukautuu näytön leveyteen */
+    max-width: 340px;
+  }
+}
+
 </style>
 </head>
 <body>
