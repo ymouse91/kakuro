@@ -124,7 +124,7 @@
   .board::before { animation: none; opacity: .6; }
 }
 
-  .cell{ width:var(--cell); height:var(--cell); background:#fff; display:grid; place-items:center;
+  .cell{ width:var(--cell); height:auto; aspect-ratio: 1 / 1;  background:#fff; display:grid; place-items:center;
     font-weight:700; font-size:20px; cursor:pointer; position:relative; border-radius:8px; transition:transform .06s ease; }
   .cell:active{ transform:scale(.98) }
   .cell.selected{ outline:3px solid var(--accent); z-index:2 }
@@ -339,7 +339,7 @@
 let N = 10; // kokonaiskoko (sis. kehyksen)
 let MIN_RUN = 2;
 let MAX_RUN = 6;
-let SHOW_OK = true; // UUSI: vihreä korostus päällä/pois
+let SHOW_OK = false; // UUSI: vihreä korostus päällä/pois
 const MAX_NODE_VISITS = 120000;  // classic-solver
 const MAX_MASK_TRIES = 400;
 const UNIQUE_NODE_CAP = 250000;  // uniqueness-solverin varoraja
@@ -1052,7 +1052,7 @@ startBtn.addEventListener('click', ()=>{
   padding: 4px;
   z-index: 9999;
 ">
-  Versio 1.0.4
+  Versio 1.0.5
 </footer>
 </body>
 </html>
