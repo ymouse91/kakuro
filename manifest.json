@@ -1,6 +1,7 @@
 {
   "name": "Kakuro",
   "short_name": "Kakuro",
+  "scope": "./",
   "icons": [
     {
       "src": "pwa_icon_192.png",
