@@ -1,4 +1,5 @@
-const CACHE_NAME = 'tavupeli-v1';
+const CACHE_NAME = 'tavupeli-v2';
+const SCOPE = './';
 const FILES_TO_CACHE = [
   './',
   './index.html',
