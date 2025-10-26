@@ -1,6 +1,6 @@
 // sw.js – Tavupeli (offline app-shell Safari/iPad yhteensopiva)
 const CACHE_PREFIX = 'tavupeli-';
-const CACHE_VERSION = 'v6';
+const CACHE_VERSION = 'v7';
 const CACHE = `${CACHE_PREFIX}${CACHE_VERSION}`;
 
 // Jos /<repo>/ -polku (GitHub Pages), laita tähän sama polku kuin manifestin start_url/scope
@@ -9,9 +9,8 @@ const SCOPE = './'; // tai esim. '/tavupeli/'
 const ASSETS = [
   `${SCOPE}`,
   `${SCOPE}index.html`,
-  `${SCOPE}manifest.json`, // nimeä vastaamaan omaasi
-  `${SCOPE}ohje.html`,              // lisää JS
-  `${SCOPE}pwa_icon_180.png`,
+  `${SCOPE}manifest.json`,
+  `${SCOPE}ohje.html`,
   `${SCOPE}pwa_icon-192.png`,
   `${SCOPE}pwa_icon-512.png`
 ];
