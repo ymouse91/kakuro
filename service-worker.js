@@ -9,7 +9,7 @@ const SCOPE = '/kakuro/'; // tai esim. '/tavupeli/'
 const ASSETS = [
   `${SCOPE}`,
   `${SCOPE}index.html`,
-  `${SCOPE}manifest.webmanifest`, // nimeä vastaamaan omaasi
+  `${SCOPE}manifest.json`, // nimeä vastaamaan omaasi
   `${SCOPE}ohje.html`,              // lisää JS
   `${SCOPE}pwa_icon_180.png`,
   `${SCOPE}pwa_icon-192.png`,
