@@ -10,8 +10,7 @@ const ASSETS = [
   `${SCOPE}`,
   `${SCOPE}index.html`,
   `${SCOPE}manifest.webmanifest`, // nimeä vastaamaan omaasi
-  `${SCOPE}app.js`,              // lisää JS
-  `${SCOPE}styles.css`,          // lisää CSS
+  `${SCOPE}ohje.html`,              // lisää JS
   `${SCOPE}pwa_icon_180.png`,
   `${SCOPE}pwa_icon-192.png`,
   `${SCOPE}pwa_icon-512.png`
