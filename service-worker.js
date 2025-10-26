@@ -1,6 +1,6 @@
 // sw.js – Tavupeli (offline app-shell Safari/iPad yhteensopiva)
 const CACHE_PREFIX = 'tavupeli-';
-const CACHE_VERSION = 'v3';
+const CACHE_VERSION = 'v4';
 const CACHE = `${CACHE_PREFIX}${CACHE_VERSION}`;
 
 // Jos /<repo>/ -polku (GitHub Pages), laita tähän sama polku kuin manifestin start_url/scope
