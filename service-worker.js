@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kakuro-v1.21';
+const CACHE_NAME = 'tavupeli-v3';
 const ASSETS = [
   './',
   './index.html',
