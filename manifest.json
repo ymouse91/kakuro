@@ -1,20 +1,24 @@
 {
   "name": "Kakuro",
   "short_name": "Kakuro",
+  "id": "kakuro",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0F172A",
+  "theme_color": "#0F172A",
+  "start_url": "./index.html",
   "icons": [
     {
       "src": "./pwa_icon_192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "./pwa_icon_512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
-  ],
-  "display": "standalone",
-  "background_color": "#0F172A",
-  "theme_color": "#0F172A",
-  "start_url": "./index.html"
+  ]
 }
