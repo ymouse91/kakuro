@@ -4,7 +4,6 @@ const ASSETS = [
   './index.html',
   './ohje.html',
   './manifest.json',
-  './service-worker.js',
   './pwa_icon_192.png',
   './pwa_icon_512.png'
 ];
