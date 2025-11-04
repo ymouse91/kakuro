@@ -1,9 +1,10 @@
-const CACHE_NAME = 'tavupeli-v5';
+const CACHE_NAME = 'tavupeli-v6';
 const ASSETS = [
   './',
   './index.html',
   './ohje.html',
   './manifest.json',
+  './pwa_icon_180.png',
   './pwa_icon_192.png',
   './pwa_icon_512.png'
 ];
